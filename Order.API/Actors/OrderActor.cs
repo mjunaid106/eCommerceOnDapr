@@ -2,6 +2,7 @@
 using Dapr.Client;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics.Metrics;
+using System.Net.Http.Json;
 
 namespace Order.API.Actors
 {
@@ -33,12 +34,13 @@ namespace Order.API.Actors
                 Buyer = buyer,
                 OrderItems = orderItems,
             };
+            var httpClient = DaprClient.CreateInvokeHttpClient();
+            var product = await httpClient.GetFromJsonAsync<Product>($"http://product-api/api/product?productId={orderItems.First().Product.Id}");
 
-            var request = client.CreateInvokeMethodRequest(HttpMethod.Get, "product-api", $"/api/Product/{orderItems.First().Product.Id}");
-            //var product = await client.InvokeMethodAsync<Product>(request);
-            //if (product.QuantityAvailable + orderItems.First().Quantity >= 0)
+            if (product.QuantityAvailable >= orderItems.First().Quantity)
             {
                 await StateManager.SetStateAsync(OrderDetailsStateName, order);
+                await client.PublishEventAsync<Order>("pubsub", "neworder", order);
                 return OrderId;
             }
             return Guid.Empty;
