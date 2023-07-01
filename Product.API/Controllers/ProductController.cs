@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dapr;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.API.Services;
 
@@ -27,5 +28,12 @@ namespace Catalogue.API.Controllers
         {
             return await productService.GetProductAsync(productId);
         }
+
+        //[Topic("pubsub", "neworder")]
+        //[HttpPost("newproductorder")]
+        //public void HandleProductOrder([FromBody] string order)
+        //{
+        //    Console.WriteLine("Subscriber received : " + order);
+        //}
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Order.API.Actors
 {
-    public class Product
+    public record Product
     {
         public Guid Id { get; set; }
         public int QuantityAvailable { get; set; }

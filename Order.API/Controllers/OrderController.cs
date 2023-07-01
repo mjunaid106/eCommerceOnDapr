@@ -21,7 +21,7 @@ namespace Order.API.Controllers
         {
             var actorId = new ActorId(Guid.NewGuid().ToString());
             var proxy = _actorProxyFactory.CreateActorProxy<IOrderActor>(actorId, nameof(OrderActor));
-            return await proxy.SubmitAsync(orderRequest.Buyer, orderRequest.OrderItems.ToList());
+            return await proxy.SubmitAsync(orderRequest.Buyer, orderRequest.OrderItem);
         }
 
         [HttpGet]

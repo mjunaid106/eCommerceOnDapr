@@ -1,8 +1,5 @@
 ﻿using Dapr.Actors.Runtime;
 using Dapr.Client;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Diagnostics.Metrics;
-using System.Net.Http.Json;
 
 namespace Order.API.Actors
 {
@@ -24,7 +21,7 @@ namespace Order.API.Actors
             return StateManager.GetStateAsync<Order>(OrderDetailsStateName);
         }
 
-        public async Task<Guid> SubmitAsync(Buyer buyer, IList<OrderItem> orderItems)
+        public async Task<Guid> SubmitAsync(Buyer buyer, OrderItem orderItems)
         {
             var order = new Order
             {
@@ -32,15 +29,16 @@ namespace Order.API.Actors
                 OrderDate = DateTime.UtcNow,
                 OrderStatus = OrderStatus.Submitted,
                 Buyer = buyer,
-                OrderItems = orderItems,
+                OrderItem = orderItems,
             };
             var httpClient = DaprClient.CreateInvokeHttpClient();
-            var product = await httpClient.GetFromJsonAsync<Product>($"http://product-api/api/product?productId={orderItems.First().Product.Id}");
+            var product = await httpClient.GetFromJsonAsync<Product>($"http://product-api/api/product?productId={orderItems.Product.Id}");
 
-            if (product.QuantityAvailable >= orderItems.First().Quantity)
+            if (product?.QuantityAvailable >= orderItems.Quantity)
             {
                 await StateManager.SetStateAsync(OrderDetailsStateName, order);
-                await client.PublishEventAsync<Order>("pubsub", "neworder", order);
+                //await client.PublishEventAsync<string>("pubsub", "neworder", OrderId.ToString());
+                await client.PublishEventAsync("pubsub", "neworder", order);
                 return OrderId;
             }
             return Guid.Empty;

@@ -2,9 +2,9 @@
 
 namespace Order.API.Controllers
 {
-    public class OrderRequest
+    public record OrderRequest
     {
         public Buyer Buyer { get; set; }
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public OrderItem OrderItem { get; set; }
     }
 }
