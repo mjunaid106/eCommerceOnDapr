@@ -1,4 +1,4 @@
-﻿using Order.API.Actors;
+﻿using Order.API.Models;
 
 namespace Order.API.Controllers
 {

@@ -1,12 +1,13 @@
-﻿namespace Order.API.Models
-{
-    public class Product
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+﻿using System.Text.Json.Serialization;
 
+namespace Order.API.Models
+{
+    public record Product
+    {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
+        [JsonPropertyName("quantityAvailable")]
         public int QuantityAvailable { get; set; }
     }
 }

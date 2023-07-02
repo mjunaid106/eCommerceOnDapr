@@ -30,7 +30,7 @@ namespace Catalogue.API.Controllers
 
         [Topic("pubsub", "neworder")]
         [HttpPost("updateProductAvailableAmount")]
-        public void UpdateProductAvailableAmount([FromBody] Order.API.Actors.Order order)
+        public void UpdateProductAvailableAmount([FromBody] Order.API.Models.Order order)
         {
             Console.WriteLine("Subscriber received : " + order);
         }

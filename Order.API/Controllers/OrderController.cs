@@ -25,7 +25,7 @@ namespace Order.API.Controllers
         }
 
         [HttpGet]
-        public async Task<Actors.Order> GetOrderStatus(Guid orderId)
+        public async Task<Models.Order> GetOrderStatus(Guid orderId)
         {
             var actorId = new ActorId(orderId.ToString());
             var proxy = _actorProxyFactory.CreateActorProxy<IOrderActor>(actorId, nameof(OrderActor));

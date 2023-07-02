@@ -17,14 +17,14 @@ namespace Order.API.Actors
 
         private Guid OrderId => Guid.Parse(Id.GetId());
 
-        public Task<Order> GetDetails()
+        public Task<Models.Order> GetDetails()
         {
-            return StateManager.GetStateAsync<Order>(OrderDetailsStateName);
+            return StateManager.GetStateAsync<Models.Order>(OrderDetailsStateName);
         }
 
         public async Task<Guid> SubmitAsync(Buyer buyer, OrderItem orderItems)
         {
-            var order = new Order
+            var order = new Models.Order
             {
                 Id = OrderId,
                 OrderDate = DateTime.UtcNow,

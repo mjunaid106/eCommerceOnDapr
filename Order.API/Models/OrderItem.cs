@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Order.API.Actors
+namespace Order.API.Models
 {
     public record OrderItem
     {

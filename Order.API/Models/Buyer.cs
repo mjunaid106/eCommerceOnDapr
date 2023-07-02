@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Order.API.Actors
+namespace Order.API.Models
 {
     public record Buyer
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
-        
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
