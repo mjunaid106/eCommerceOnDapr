@@ -22,5 +22,13 @@ namespace Product.API.Services
         {
             return await client.GetStateAsync<Models.Product>(DAPR_STORE_NAME, productId.ToString());
         }
+
+        public async Task<Models.Product> UpdateAvailableAmount(Guid productId, int orderedQuantity)
+        {
+            var product = await client.GetStateAsync<Models.Product>(DAPR_STORE_NAME, productId.ToString());
+            product.QuantityAvailable -= orderedQuantity;
+            await client.SaveStateAsync(DAPR_STORE_NAME, product.Id.ToString(), product);
+            return product;
+        }
     }
 }

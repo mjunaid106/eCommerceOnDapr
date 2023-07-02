@@ -30,9 +30,11 @@ namespace Catalogue.API.Controllers
 
         [Topic("pubsub", "neworder")]
         [HttpPost("updateProductAvailableAmount")]
-        public void UpdateProductAvailableAmount([FromBody] Order.API.Models.Order order)
+        public async void UpdateProductAvailableAmount([FromBody] Order.API.Models.Order order)
         {
-            Console.WriteLine("Subscriber received : " + order);
+            Console.WriteLine($"Order received : {order}");
+            var product = await productService.UpdateAvailableAmount(order.OrderItem.Product.Id, order.OrderItem.Quantity);
+            Console.WriteLine($"Product updated : {product.QuantityAvailable}");
         }
     }
 }
