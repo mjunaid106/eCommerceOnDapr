@@ -7,6 +7,7 @@ namespace Order.API.Actors
     public class OrderActor : Actor, IOrderActor
     {
         private const string OrderDetailsStateName = "OrderDetails";
+        private const string STATE_STORE_NAME = "ecommerceondapr-statestore";
         DaprClient client;
 
         public OrderActor(ActorHost host) : base(host)
@@ -38,7 +39,7 @@ namespace Order.API.Actors
             if (product?.QuantityAvailable >= orderItems.Quantity)
             {
                 await StateManager.SetStateAsync(OrderDetailsStateName, order);
-                await client.PublishEventAsync("pubsub", "neworder", order);
+                await client.PublishEventAsync(STATE_STORE_NAME, "neworder", order);
                 return OrderId;
             }
             return Guid.Empty;

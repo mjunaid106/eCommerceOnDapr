@@ -2,16 +2,13 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: ecommerceondapr-statestore
-  namespace: eCommerce
 spec:
   type: state.redis
   version: v1
   metadata:
   - name: redisHost
-    value: redis:6379
+    value: localhost:6379
   - name: redisPassword
-    secretKeyRef:
-      name: State.RedisPassword
-      key: State.RedisPassword
+    value: ""
   - name: actorStateStore
     value: "true"

@@ -9,6 +9,7 @@ namespace Catalogue.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService productService;
+        private const string STATE_STORE_NAME = "ecommerceondapr-statestore";
 
         public ProductController(IProductService productService)
         {
@@ -27,7 +28,7 @@ namespace Catalogue.API.Controllers
             return await productService.GetProductAsync(productId);
         }
 
-        [Topic("pubsub", "neworder")]
+        [Topic(STATE_STORE_NAME, "neworder")]
         [HttpPost("updateProductAvailableAmount")]
         public async void UpdateProductAvailableAmount([FromBody] Order.API.Models.Order order)
         {
