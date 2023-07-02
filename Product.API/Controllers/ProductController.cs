@@ -1,5 +1,4 @@
 ﻿using Dapr;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.API.Services;
 

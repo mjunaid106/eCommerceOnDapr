@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Builder;
 using Product.API.Services;
-using Dapr;
-using Order.API.Actors;
 
 var builder = WebApplication.CreateBuilder(args);
 
