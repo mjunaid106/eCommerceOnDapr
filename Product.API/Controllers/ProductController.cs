@@ -23,17 +23,16 @@ namespace Catalogue.API.Controllers
         }
 
         [HttpGet]
-        // Sample Product Id: 0c7e5eeb-29b8-4d54-a24d-3e8cb49c2d8d
         public async Task<Product.API.Models.Product> Get(Guid productId)
         {
             return await productService.GetProductAsync(productId);
         }
 
-        //[Topic("pubsub", "neworder")]
-        //[HttpPost("newproductorder")]
-        //public void HandleProductOrder([FromBody] string order)
-        //{
-        //    Console.WriteLine("Subscriber received : " + order);
-        //}
+        [Topic("pubsub", "neworder")]
+        [HttpPost("updateProductAvailableAmount")]
+        public void UpdateProductAvailableAmount([FromBody] Order.API.Actors.Order order)
+        {
+            Console.WriteLine("Subscriber received : " + order);
+        }
     }
 }

@@ -23,15 +23,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseEndpoints(endpoints =>
-{
-    app.MapSubscribeHandler();
-}
+app.MapSubscribeHandler();
 
-app.MapPost("/orders", [Topic("pubsub", "neworder")] (Order.API.Actors.Order order) => {
-    Console.WriteLine("Subscriber received : " + order);
-    return Results.Ok(order);
-});
+app.UseCloudEvents();
 
 app.UseHttpsRedirection();
 

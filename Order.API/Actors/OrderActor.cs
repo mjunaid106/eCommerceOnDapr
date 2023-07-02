@@ -1,5 +1,6 @@
 ﻿using Dapr.Actors.Runtime;
 using Dapr.Client;
+using Order.API.Models;
 
 namespace Order.API.Actors
 {
@@ -37,7 +38,6 @@ namespace Order.API.Actors
             if (product?.QuantityAvailable >= orderItems.Quantity)
             {
                 await StateManager.SetStateAsync(OrderDetailsStateName, order);
-                //await client.PublishEventAsync<string>("pubsub", "neworder", OrderId.ToString());
                 await client.PublishEventAsync("pubsub", "neworder", order);
                 return OrderId;
             }
