@@ -10,3 +10,9 @@ spec:
     value: localhost:6379
   - name: redisPassword
     value: ""
+# # Uncomment to use SB as pub sub provider 
+#  type: pubsub.azure.servicebus.topics
+#  version: v1
+#  metadata:
+#  - name: connectionString
+#    value: ""
