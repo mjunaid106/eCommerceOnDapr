@@ -12,3 +12,11 @@ spec:
     value: ""
   - name: actorStateStore
     value: "true"
+# # Uncomment to use SQL as state store provider
+#  type: state.sqlserver
+#  version: v1
+#  metadata:
+#    - name: connectionString
+#      value: ""
+#    - name: actorStateStore
+#      value: "true"
