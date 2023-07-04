@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compotents", "compotents", "{810247C2-391C-47ED-B513-B05D6063EF27}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{810247C2-391C-47ED-B513-B05D6063EF27}"
 	ProjectSection(SolutionItems) = preProject
 		components\pubsub.yaml = components\pubsub.yaml
 		components\statestore.yaml = components\statestore.yaml
